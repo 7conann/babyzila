@@ -1,13 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SidebarService } from '../Service/sidebar.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
-  // sidebarVisible: boolean = false;
+export class NavbarComponent implements OnInit {
 
+  constructor(private route: Router, private sidebarService: SidebarService) { }
+
+  ngOnInit() {
+    console.log('NavbarComponent');
+  }
+
+  goToRoute(route: string) {
+    this.route.navigate([route]);
+  }
+
+  toggleSidebar() {
+    this.sidebarService.toggleSidebar();
+  }
 }
