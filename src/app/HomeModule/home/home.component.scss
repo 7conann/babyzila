@@ -31,7 +31,6 @@
   align-items: center;
   justify-self: center;
   font-weight: 500;
-
   button{
     color:black;
     height: 35px;
@@ -39,6 +38,11 @@
     width: 70px;
     font-weight: 500;
     border: 0px;
+    cursor: pointer;
+
+  }
+  p{
+    cursor: pointer;
   }
 }
 .logo{
@@ -46,6 +50,19 @@
   align-items: center;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+
+}
+.loading{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  p{
+    margin: 0px;
+    color: white;
+    font-weight: 500;
+  }
 }
 @media screen and (max-width: 768px){
   .nav-itens{
@@ -54,5 +71,9 @@
   }
   .nav{
     height: 100px;
+  }
+  .container{
+    width: 102%;
+    height: 110vh
   }
 }
