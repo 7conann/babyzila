@@ -1,8 +1,25 @@
-<app-navbar ></app-navbar>
+<app-navbar></app-navbar>
 <div class="container">
-  @if (sidebarVisible) {
     <app-sidebar></app-sidebar>
-  }
-  <h1 style="color: white;">TESTE Configurações</h1>
-</div>
+    <div class="container-right">
+      <div class="container-settings">
+        <p style="color:white; font-weight: 500;">Configurações</p>
+        <div class="form-group"style="color:white">
+            <label for="username"style="color:white">Nome</label>
+            <input id="username" placeholder="Babizyla123#" type="text" class="form-control">
+        </div>
+        <div class="form-group"style="color:white">
+          <label for="username"style="color:white">Email</label>
+          <input id="username" type="text" placeholder="Babizyla@gmail.com" class="form-control">
+      </div>
+      <div class="form-group"style="color:white">
+        <label for="username"style="color:white">Senha</label>
+        <input id="username" type="password"placeholder="Senha123#"  class="form-control">
+    </div>
+    <div>
+      <button class="btn btn-primary">Salvar</button>
+    </div>
+      </div>
 
+    </div>
+</div>

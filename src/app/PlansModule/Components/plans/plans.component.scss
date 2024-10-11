@@ -1,0 +1,128 @@
+
+body{
+  background-image: none !important;
+  background-color: black;
+}
+.container-right{
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+  border-top: 1px solid #161C3D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.container{
+  height: 80%;
+}
+p{
+  color: white;
+
+  margin: 0px;
+}
+.planos{
+display: flex;
+justify-content: center;
+flex-direction: column;
+gap: 10px;
+background-color: black;
+}
+.flex-plans{
+  display: flex;
+}
+.container-planos{
+  width: 340px;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid #161C3D;
+  color: white;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 17px;
+}
+.container-planos-text{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-around;
+}
+.icon-flex{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+button{
+  width: 100%;
+  color:black;
+  height: 45px;
+  border-radius: 10px;
+  font-weight: 500;
+  border: 0px;
+  cursor: pointer;
+  background-color: white;
+  font-size: 17px;
+}
+.ghost{
+  display: none;
+}
+.value-flex{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  p{
+    display: flex;
+    gap: 10px;
+    font-size: 20px;
+  }
+}
+.size{
+  font-size: 40px;
+}
+@media screen and (max-width: 1417px){
+
+  .container-planos{
+    width: 270px;
+  }
+}
+@media  screen and (max-width: 1200px) {
+
+.container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.container-planos{
+  width: 100%;
+}
+.flex-plans {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.planos{
+  width: 100%;
+  font-size: 14px;
+
+}
+.ghost{
+  display: block;
+  margin-top: 100px;
+}
+button{
+  width: 90%;
+}
+
+}
+@media  screen and (max-width: 500px) {
+  .container-planos{
+    width: auto;
+  }
+  .ghost{
+    margin-top: 200px;
+  }
+  .planos{
+    margin-left: 10px
+  }
+}

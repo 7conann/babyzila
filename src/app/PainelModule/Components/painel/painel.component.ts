@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../../../shared/navbar/navbar.component';
 import { SidebarComponent } from '../../../../shared/sidebar/sidebar.component';
-import { SidebarService } from '../../../../shared/Service/sidebar.service';
 
 @Component({
   selector: 'app-painel',
@@ -13,11 +12,9 @@ import { SidebarService } from '../../../../shared/Service/sidebar.service';
 export class PainelComponent {
   sidebarVisible: boolean = false;
 
-  constructor(private sidebarService: SidebarService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.sidebarService.sidebarVisible$.subscribe(visible => {
-      this.sidebarVisible = visible;
-    });
+
   }
 }

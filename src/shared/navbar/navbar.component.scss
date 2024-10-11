@@ -1,6 +1,5 @@
 .nav{
   width: 100%;
-  height: 200px;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -10,6 +9,8 @@
   width: 100%;
   padding-left: 100px;
   padding-right: 100px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   display: flex;
   justify-content: space-between;
 }

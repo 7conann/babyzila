@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SidebarService } from '../Service/sidebar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +9,7 @@ import { SidebarService } from '../Service/sidebar.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private route: Router, private sidebarService: SidebarService) { }
+  constructor(private route: Router, ) { }
 
   ngOnInit() {
     console.log('NavbarComponent');
@@ -20,7 +19,5 @@ export class NavbarComponent implements OnInit {
     this.route.navigate([route]);
   }
 
-  toggleSidebar() {
-    this.sidebarService.toggleSidebar();
-  }
+
 }

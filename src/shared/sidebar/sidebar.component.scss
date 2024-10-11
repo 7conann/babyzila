@@ -26,11 +26,26 @@
     margin: 0px;
   }
 }
-@media screen and (max-width: 868px){
+@media screen and (max-width: 1208px){
   .side-container{
-    width: 50%;
+    width: 99%
   }
+}
+@media screen and (max-width: 868px){
+  img{
+    width: 15px;
+  }
+  .side-itens{
+    padding: 10px 5px;
+  }
+  .side-container{
+    width: 97%
+  }
+  .flex{
+    gap: 10px;
+  }
+
   p{
-    font-size: 14px;
+    font-size: 10px;
   }
 }
