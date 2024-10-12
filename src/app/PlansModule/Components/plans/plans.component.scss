@@ -80,6 +80,16 @@ button{
 .size{
   font-size: 40px;
 }
+.button-gold{
+  color: white;
+  background: radial-gradient(circle, rgba(41, 5, 120, 0.689), rgba(0,34,255,1) 100%);
+
+}
+.button-affiliate{
+  color: white;
+  background-color: black;
+  border: 1px solid rgb(164, 164, 164);
+}
 @media screen and (max-width: 1417px){
 
   .container-planos{

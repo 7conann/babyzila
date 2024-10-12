@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+
+<div class="container-main">
+
+  <div class="chat-container">
+    <img src="../../../../assets/icons/obizilla favicon 1.png" alt="">
+
+    <div class="chat-messages" id="chat-messages">
+      <div *ngFor="let message of messages" [ngClass]="{'user': message.sender === 'user', 'bot': message.sender === 'bot'}" class="message">
+        {{ message.text }}
+      </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Digite sua mensagem..." (keydown.enter)="sendMessage()"/>
+      <button (click)="sendMessage()">Enviar</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- <div class="container-main">
+  <img src="../../../../assets/icons/obizilla favicon 1.png" alt="">
+  <div style="color: white;" *ngFor="let message of messages" [ngClass]="{'user': message.sender === 'user'}" class="message">
+      {{ message.text }}
+  </div>
+  <div class="chat-container">
+    <div class="chat-messages" id="chat-messages">
+      <div *ngFor="let message of messages" [ngClass]="{'bot': message.sender === 'bot'}" class="message">
+        {{ message.text }}
+      </div>
+    </div>
+
+  </div>
+  <div class="chat-input">
+    <input type="text" id="user-input" placeholder="Digite sua mensagem..." (keydown.enter)="sendMessage()"/>
+    <button (click)="sendMessage()">Enviar</button>
+  </div>
+</div> -->

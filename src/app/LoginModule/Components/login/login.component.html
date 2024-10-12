@@ -1,3 +1,5 @@
+@if (loginLoading) {
+
 <div class="nav">
   <div class="nav-itens">
     <img src="../../../assets/img/Navbar Brand.png" alt="" />
@@ -14,3 +16,8 @@
 
   </div>
 </div>
+
+}
+@if (!loginLoading) {
+  <app-login-formulario></app-login-formulario>
+}

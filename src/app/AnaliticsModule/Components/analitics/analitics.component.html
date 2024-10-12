@@ -1,0 +1,34 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <app-sidebar></app-sidebar>
+  <div class="container-right">
+    <div class="header-container">
+      <div class="header">
+        <p>Analytics</p>
+        <p-calendar [(ngModel)]="currentDate" [iconDisplay]="'input'" [showIcon]="true" inputId="templatedisplay">
+          <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
+            <i class="pi pi-clock pointer-events-none" (click)="clickCallBack($event)"></i>
+          </ng-template>
+        </p-calendar>
+      </div>
+
+      <div class="card">
+         <div class="card-text">
+          <p>Total em vendas:</p>
+          <h4>R$ 2.400,00</h4>
+         </div>
+         <div class="card-text">
+          <p>Revenue Share</p>
+          <h4>R$ 1.690,00/mês</h4>
+         </div>
+         <div class="card-text">
+          <p>Assinaturas ativas</p>
+          <h4>40</h4>
+         </div>
+      </div>
+      <p>Links de Divulgação:</p>
+      <img src="../../../../assets/img/Frame 10.png" alt="">
+      <p></p>
+    </div>
+  </div>
+</div>
