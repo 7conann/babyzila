@@ -2,11 +2,12 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../../../shared/navbar/navbar.component';
 import { AuthService } from '../../../../shared/Service/auth.service';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [ CommonModule, NavbarComponent], // Adiciona o CommonModule para usar ngClass
+  imports: [CommonModule, NavbarComponent, ButtonModule], // Adiciona o CommonModule e ButtonModule para usar ngClass e PrimeNG
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
@@ -16,8 +17,6 @@ export class ChatComponent implements OnInit {
   aiResponses: string[] = [];
   canSendMessageFlag = true;
   showWelcomeMessage = true;
-  userPlanLimit: number = 0;
-  messagesSentToday: number = 0;
   userID: string = '';
   planID: string = '';
 
@@ -34,8 +33,8 @@ export class ChatComponent implements OnInit {
           this.planID = userData.plan_id ?? '';
           const planData = await this.auth.getPlanById(this.planID);
           if (planData) {
-            this.userPlanLimit = planData.message_limit;
-            this.loadMessagesSentToday();
+            // this.userPlanLimit = planData.message_limit;
+            // this.loadMessagesSentToday();
           }
         }
       } catch (error) {
@@ -54,18 +53,8 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  canSendMessage(): boolean {
-    return this.messagesSentToday < this.userPlanLimit;
-  }
-
-  loadMessagesSentToday(): void {
-    const today = new Date().toISOString().split('T')[0];
-    const storedData = localStorage.getItem(`messagesSent_${this.userID}_${today}`);
-    this.messagesSentToday = storedData ? parseInt(storedData, 10) : 0;
-  }
-
   onEnter(event: KeyboardEvent) {
-    if (event.key === 'Enter' && this.canSendMessage() && !event.shiftKey) {
+    if (event.key === 'Enter' && this.canSendMessageFlag && !event.shiftKey) {
       event.preventDefault();
       this.sendMessage();
     }
@@ -82,9 +71,10 @@ export class ChatComponent implements OnInit {
     this.showWelcomeMessage = false;
 
     this.messages.push({ text: messageText, sender: 'user' });
+    this.userQuestions.push(messageText);
 
-    const loadingDiv = this.createLoadingDiv();
-    this.canSendMessageFlag = false;
+    this.changeDetectorRef.detectChanges();
+    this.scrollToBottom();
 
     fetch('https://webhook.workez.online/webhook/fe8ee5ca-1a13-449f-bc2c-54fca1795da6', {
       method: 'POST',
@@ -98,17 +88,22 @@ export class ChatComponent implements OnInit {
     })
     .then(response => response.json())
     .then(data => {
+      console.log('Data:', data);
       const botText = this.extractBotResponse(data);
       this.aiResponses.push(botText);
+      console.log('Bot responses:', this.aiResponses);
       this.messages.push({ text: botText, sender: 'bot' });
+      console.log('Messages:', this.messages);
       this.changeDetectorRef.detectChanges();
+      this.scrollToBottom();
+      this.canSendMessageFlag = true;
     })
     .catch(error => {
       console.error('Erro:', error);
+      this.canSendMessageFlag = true;
     });
   }
 
-  // Função auxiliar para criar o div de loading
   createLoadingDiv() {
     const chatArea = document.getElementById('chatArea');
     const loadingDiv = document.createElement('div');
@@ -123,7 +118,6 @@ export class ChatComponent implements OnInit {
     return loadingDiv;
   }
 
-  // Função para extrair a resposta da IA
   extractBotResponse(data: any): string {
     if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
       return data.choices[0].message.content;
@@ -134,13 +128,8 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  saveMessagesSentToday(): void {
-    const today = new Date().toISOString().split('T')[0];
-    localStorage.setItem(`messagesSent_${this.userID}_${today}`, this.messagesSentToday.toString());
-  }
-
   scrollToBottom() {
-    const chatMessagesElement = document.getElementById('chat-messages');
+    const chatMessagesElement = document.getElementById('chatArea');
     if (chatMessagesElement) {
       chatMessagesElement.scrollTop = chatMessagesElement.scrollHeight;
     }
