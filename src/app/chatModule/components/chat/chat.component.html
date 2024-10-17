@@ -1,38 +1,38 @@
 <app-navbar></app-navbar>
 
-<div class="container-main">
+<!-- <div class="container-main">
 
   <div class="chat-container">
-    <img src="../../../../assets/icons/obizilla favicon 1.png" alt="">
+    <img src="../../../../assets/icons/obizilla favicon 1.png" alt="Mascote" class="mascote" style="width: 50px; height: 50px;">
 
-    <div class="chat-messages" id="chat-messages">
-      <div *ngFor="let message of messages" [ngClass]="{'user': message.sender === 'user', 'bot': message.sender === 'bot'}" class="message">
-        {{ message.text }}
-      </div>
+    <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'bot-response': message.sender === 'bot'}" class="message">
+      <i *ngIf="message.sender === 'user'" class="pi pi-user icon"></i>
+      <div class="text">{{ message.text }}</div>
     </div>
+
     <div class="chat-input">
-      <input type="text" id="user-input" placeholder="Digite sua mensagem..." (keydown.enter)="sendMessage()"/>
-      <button (click)="sendMessage()">Enviar</button>
+      <input type="text" id="userInput" placeholder="Digite sua mensagem..." (keydown.enter)="sendMessage()" [disabled]="!canSendMessage()" />
+      <button id="sendButton" (click)="sendMessage()" [disabled]="!canSendMessage()">Enviar</button>
     </div>
+
+    <p *ngIf="!canSendMessage()">Você atingiu o limite de mensagens para hoje.</p>
   </div>
 
+</div> -->
+<div class="container">
+  <!-- Mensagem de boas-vindas -->
+  <div id="messageBox" class="message-box">
+    <img src="images/obizilla-favicon-1-17.png" alt="Mascote" class="mascote">
+    <p class="message">Olá! como posso te ajudar hoje?</p>
+  </div>
+
+  <!-- Área do chat -->
+  <div id="chatArea" class="chat-area"></div>
 </div>
 
-<!-- <div class="container-main">
-  <img src="../../../../assets/icons/obizilla favicon 1.png" alt="">
-  <div style="color: white;" *ngFor="let message of messages" [ngClass]="{'user': message.sender === 'user'}" class="message">
-      {{ message.text }}
+<div class="input-wrapper">
+  <div class="input-container">
+    <textarea id="userInput" placeholder="Digite aqui..." rows="1"></textarea>
+    <button name="arrow-up-circle-outline" id="sendButton"></button>
   </div>
-  <div class="chat-container">
-    <div class="chat-messages" id="chat-messages">
-      <div *ngFor="let message of messages" [ngClass]="{'bot': message.sender === 'bot'}" class="message">
-        {{ message.text }}
-      </div>
-    </div>
-
-  </div>
-  <div class="chat-input">
-    <input type="text" id="user-input" placeholder="Digite sua mensagem..." (keydown.enter)="sendMessage()"/>
-    <button (click)="sendMessage()">Enviar</button>
-  </div>
-</div> -->
+</div>

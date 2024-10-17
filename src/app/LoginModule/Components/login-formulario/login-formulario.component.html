@@ -1,14 +1,53 @@
+
 <div class="container-login">
+
+
   <img src="../../../../assets/img/Navbar Brand.png" alt="" />
+  <app-toast></app-toast>
 
-<div class="container-settings">
+  <div class="container-settings">
+@if (register == false) {
+    <p style="color: white; font-weight: 500; font-size: 30px;">Bem Vindo!</p>
+    <div class="form-group" style="color:white">
+      <div class="input-container">
+        <input id="email" placeholder=" "[(ngModel)]="email" type="email" class="form-control">
+        <label for="email">Email*</label>
+      </div>
 
-  <p style="color:white; font-weight: 500;">Bem Vindo!</p>
-  <div class="form-group"style="color:white">
-      <input id="email" placeholder="Email" type="text" class="form-control">
-      <button class="btn btn-primary">Continue</button>
+      <div class="input-container">
+        <input id="password"[(ngModel)]="password" placeholder=" " type="password" class="form-control">
+        <label for="password">Senha*</label>
+      </div>
+
+      <button class="btn btn-primary" (click)="login()">Continue</button>
+      <!-- <button (click)="login()">Login</button> -->
+
+    </div>
+    <p>Não possui uma conta?</p>
+    <p style="color: #0022FF;cursor: pointer;"(click)="toggleRegister()">Registre-se</p>
+  }@else {
+    <p style="color: white; font-weight: 500; font-size: 30px;">Bem Vindo!</p>
+    <div class="form-group" style="color:white">
+      <div class="input-container">
+          <input id="full_name" placeholder=" "[(ngModel)]="full_name" type="name" class="form-control">
+          <label for="full_name">Nome completo*</label>
+      </div>
+
+      <div class="input-container">
+        <input id="email" placeholder=" "[(ngModel)]="email" type="email" class="form-control">
+        <label for="email">Email*</label>
+      </div>
+
+      <div class="input-container">
+        <input id="password"[(ngModel)]="password" placeholder=" " type="password" class="form-control">
+        <label for="password">Senha*</label>
+      </div>
+
+      <button class="btn btn-primary" (click)="signUp()">Registrar</button>
+      <!-- <button (click)="login()">Login</button> -->
+
+    </div>
+    <p>Já possui uma conta?</p>
+    <p style="color: #0022FF;cursor: pointer;"(click)="toggleRegister()">Login</p>
+  }
   </div>
-  <p>Não possui uma conta?</p>
-  <p style="color: #0022FF;">Registre-se</p>
-
-</div>

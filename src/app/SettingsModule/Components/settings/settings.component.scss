@@ -1,29 +1,91 @@
-.container-right{
+* {}
+
+.wkz-dash {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  height: 100%;
+}
+
+
+.container-right {
   width: 100%;
   height: 100%;
   background-color: rgb(0, 0, 0);
   border-top: 1px solid #161C3D;
   display: flex;
-  justify-content: center;
   align-items: center;
-flex-direction: column;
+  padding: 64px 30px;
+
+  flex-direction: column;
 }
-.form-group{
+
+.form-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
-.container-settings{
+
+
+.pw-group .pw-holder {
+  display: flex;
+  align-items: center;
+}
+
+#reset-pw {
+  display: none;
+}
+
+.pw-group *ngIf {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+
+.toggle-group {
+  display: flex;
+  height: auto;
+  flex-direction: column;
+  color: #BBBB;
+
+  .toggle-holder {
+    display: flex;
+
+  }
+
+  .toggle-change {
+    display: none;
+    gap: 6px;
+    flex-direction: column;
+  }
+
+  span {
+    margin-left: 12px;
+    font-size: 14px;
+    color: #4781ff;
+    cursor: pointer;
+  }
+}
+
+.container-settings {
   width: 340px;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 17px;
-  p{
+
+  p {
     margin: 0px !important;
   }
-  input{
+
+  input {
     background-color: black;
     border: 1px solid #545454;
     height: 40px;
@@ -33,10 +95,11 @@ flex-direction: column;
   }
 
 }
-button{
+
+button {
   margin-top: 10px;
   width: 100%;
-  color:black;
+  color: black;
   height: 40px;
   border-radius: 10px;
   font-weight: 500;
@@ -45,19 +108,23 @@ button{
   background-color: white;
   font-size: 14px;
 }
-@media screen and (max-width: 868px){
-  .container-settings{
+
+@media screen and (max-width: 868px) {
+  .container-settings {
     margin-top: 30px;
     width: 90%;
   }
-  button{
+
+  button {
     font-size: 12px;
   }
-  .container{
+
+  .container {
     display: flex;
     flex-direction: column !important;
   }
-  .container-right{
+
+  .container-right {
     justify-content: start;
 
   }

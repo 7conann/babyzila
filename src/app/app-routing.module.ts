@@ -1,15 +1,17 @@
 import { provideRouter, Routes } from '@angular/router';
 import { PlansComponent } from './PlansModule/Components/plans/plans.component';
 import { SettingsComponent } from './SettingsModule/Components/settings/settings.component';
-import { LoginComponent } from './LoginModule/Components/login/login.component';
+import { login } from './LoginModule/Components/login/login.component';
 import { DashboardComponent } from './DashboardModule/Components/dashboard/dashboard.component';
-import { AnaliticsComponent } from './AnaliticsModule/Components/analitics/analitics.component';
+import { AnalyticsComponent } from './analyticsModule/Components/analytics/analytics.component';
 import { ChatComponent } from './chatModule/components/chat/chat.component';
+import { AuthGuard } from '../shared/Service/authguard.service';
 
 export const AppRoutes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'plans',
@@ -20,8 +22,8 @@ export const AppRoutes: Routes = [
         component: SettingsComponent
       },
       {
-        path: 'analitics',
-        component: AnaliticsComponent
+        path: 'analytics',
+        component: AnalyticsComponent
       },
       {
         path: '',
@@ -31,46 +33,20 @@ export const AppRoutes: Routes = [
     ]
   },
   {
-    path: 'Login',
-    component: LoginComponent
+    path: 'login',
+    component: login
   },
   {
     path: 'chat',
-    component: ChatComponent
+    component: ChatComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',
-    redirectTo: 'Login',
+    redirectTo: 'login',
   },
 ];
 
 export const appRoutingProviders = [
   provideRouter(AppRoutes)
 ];
-
-// import { Injectable } from '@angular/core';
-// import { CanActivate, Router } from '@angular/router';
-// import { AuthService } from './auth.service';
-
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class AuthGuard implements CanActivate {
-//   constructor(private authService: AuthService, private router: Router) {}
-
-//   async canActivate(): Promise<boolean> {
-//     const session = await this.authService.isAuthenticated();
-//     if (!session) {
-//       this.router.navigate(['/login']);
-//       return false;
-//     }
-//     return true;
-//   }
-// }
-
-// // No seu routes array:
-// {
-//   path: 'protected',
-//   component: ProtectedComponent,
-//   canActivate: [AuthGuard]
-// }

@@ -1,18 +1,28 @@
-<div class="side-container">
-<div class="side-itens">
-  <div class="flex"(click)="goToRoute('/dashboard/analitics')">
-    <img src="../../assets/img/Vector (1).png" alt="">
-    <p>Analytics</p>
-  </div>
-  <div class="flex"(click)="goToRoute('/dashboard/settings')">
-    <img src="../../assets/img/Vector (2).png" alt="" >
-    <p>Configurações</p>
-  </div>
-  <div class="flex"(click)="goToRoute('/dashboard/plans')">
-    <img src="../../assets/img/Vector (3).png" alt="">
-    <p>Planos</p>
-  </div>
+<div
+  class="hamburger-btn"
+  (click)="toggleSidebar()"
+  [ngClass]="isSidebarOpen ? 'open' : 'close'"
+></div>
 
+
+
+<!-- Sidebar -->
+<div class="side-container" [ngClass]="{'visible': isSidebarOpen}">
+  <div class="side-itens">
+    <div id="sbt-analytics" class="sideBtn flex" (click)="goToRoute('/dashboard/analytics')">
+      <img src="../../assets/img/analytics.png" alt="">
+      <p>Analytics</p>
+    </div>
+    <div id="sbt-settings" class="sideBtn flex" (click)="goToRoute('/dashboard/settings')">
+      <img src="../../assets/img/settings.png" alt="">
+      <p>Configurações</p>
+    </div>
+    <div id="sbt-plans" class=" sideBtn flex" (click)="goToRoute('/dashboard/plans')">
+      <img src="../../assets/img/card.png" alt="">
+      <p>Planos</p>
+    </div>
+  </div>
 </div>
 
-</div>
+
+<div class="overlay" *ngIf="isSidebarOpen" (click)="toggleSidebar()"></div>

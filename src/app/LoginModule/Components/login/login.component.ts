@@ -10,7 +10,7 @@ import { LoginFormularioComponent } from '../login-formulario/login-formulario.c
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class login implements OnInit {
   loginLoading = true;
 
   constructor(private router: Router) {}
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     // Simula uma requisição de 4 segundos para verificar o token
     setTimeout(() => {
       this.checkUserToken();
-    }, 100);
+    }, 4000);
   }
 
   checkUserToken() {
