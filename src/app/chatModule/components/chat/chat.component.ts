@@ -17,6 +17,7 @@ export class ChatComponent implements OnInit {
   aiResponses: string[] = [];
   canSendMessageFlag = true;
   showWelcomeMessage = true;
+  isLoading = false; // Variável para controlar a exibição da div de carregamento
   userID: string = '';
   planID: string = '';
 
@@ -73,6 +74,9 @@ export class ChatComponent implements OnInit {
     this.messages.push({ text: messageText, sender: 'user' });
     this.userQuestions.push(messageText);
 
+    // Define isLoading como true para exibir a div de carregamento
+    this.isLoading = true;
+
     this.changeDetectorRef.detectChanges();
     this.scrollToBottom();
 
@@ -92,6 +96,10 @@ export class ChatComponent implements OnInit {
       const botText = this.extractBotResponse(data);
       this.aiResponses.push(botText);
       console.log('Bot responses:', this.aiResponses);
+
+      // Define isLoading como false para remover a div de carregamento
+      this.isLoading = false;
+
       this.messages.push({ text: botText, sender: 'bot' });
       console.log('Messages:', this.messages);
       this.changeDetectorRef.detectChanges();
@@ -101,21 +109,11 @@ export class ChatComponent implements OnInit {
     .catch(error => {
       console.error('Erro:', error);
       this.canSendMessageFlag = true;
-    });
-  }
 
-  createLoadingDiv() {
-    const chatArea = document.getElementById('chatArea');
-    const loadingDiv = document.createElement('div');
-    loadingDiv.classList.add('bot-response');
-    loadingDiv.innerHTML = `
-      <div class="icon"></div>
-      <div class="loading">
-        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-      </div>
-    `;
-    chatArea?.appendChild(loadingDiv);
-    return loadingDiv;
+      // Define isLoading como false em caso de erro
+      this.isLoading = false;
+      this.changeDetectorRef.detectChanges();
+    });
   }
 
   extractBotResponse(data: any): string {

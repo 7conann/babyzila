@@ -1,21 +1,25 @@
 <app-navbar></app-navbar>
-
-<div class="container">
+<iframe src="https://chat-babyzilla.vercel.app/" frameborder="0"></iframe>
+<!-- <div class="container">
   <div class="chat-container">
-    <!-- <img src="../../../../assets/icons/obizilla favicon 1.png" alt="Mascote" class="mascote" style="width: 50px; height: 50px;"> -->
     <div id="messageBox" class="message-box" *ngIf="showWelcomeMessage">
           <img src="../../../../assets/icons/obizilla favicon 1.png" alt="Mascote" class="mascote" style="width: 50px; height: 50px;">
 
       <p class="message">Olá! como posso te ajudar hoje?</p>
     </div>
     <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'bot-response': message.sender === 'bot'}" class="message">
-      <!-- <i *ngIf="message.sender === 'user'" class="pi pi-user icon"></i> -->
       <div class="text">{{ message.text }}</div>
     </div>
     <div id="chatArea" class="chat-area">
       <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'bot-response': message.sender === 'bot'}" class="message">
         <i *ngIf="message.sender === 'user'" class="pi pi-user icon"></i>
         <div class="text">{{ message.text }}</div>
+      </div>
+      <div *ngIf="isLoading" class="bot-response">
+        <div class="icon"></div>
+        <div class="loading">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
       </div>
     </div>
     <div class="input-wrapper">
@@ -24,9 +28,8 @@
         <button pButton type="button" icon="pi pi-send" id="sendButton" (click)="sendMessage()" class="send-button"></button>      </div>
     </div>
 
-    <!-- <p *ngIf="!canSendMessageFlag">Você atingiu o limite de mensagens para hoje.</p> -->
   </div>
-</div>
+</div> -->
 <!-- <app-navbar></app-navbar>
 
 <div class="container">
