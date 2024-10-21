@@ -132,13 +132,15 @@ textarea::-webkit-scrollbar-thumb,
 
 /* Loader animation with three dots pulsing */
 /* Loader animation with three dots pulsing */
+/* Loader animation with three dots pulsing */
 .loading {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.loading .dot {
+.dot {
+  color: white;
   width: 8px;
   height: 8px;
   background-color: #888;
@@ -147,11 +149,11 @@ textarea::-webkit-scrollbar-thumb,
   animation: bounce 0.6s infinite alternate;
 }
 
-.loading .dot:nth-child(2) {
+.dot:nth-child(2) {
   animation-delay: 0.2s;
 }
 
-.loading .dot:nth-child(3) {
+.dot:nth-child(3) {
   animation-delay: 0.4s;
 }
 
@@ -161,8 +163,6 @@ textarea::-webkit-scrollbar-thumb,
     transform: translateY(-10px); /* Pulo mais visível */
   }
 }
-
-
 .imgs{
   width: 40px;
   height: 40px;

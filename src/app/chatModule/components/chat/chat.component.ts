@@ -167,6 +167,39 @@ appendLoading() {
   `;
 
   loadingDiv.innerHTML = `
+    <style>
+    .loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.loading .dot {
+  width: 8px;
+  height: 8px;
+  background-color: #888;
+  border-radius: 50%;
+  margin: 0 3px;
+  animation: bounce 0.6s infinite alternate;
+}
+
+.loading .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  to {
+    opacity: 0.3;
+    transform: translateY(-10px); /* Pulo mais visível */
+  }
+}
+
+    </style>
     <img src="../../../../assets/icons/obizilla favicon 1.png" alt="Mascote" class="mascote">
     <div class="loading">
       <div class="dot"></div>
