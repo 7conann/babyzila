@@ -5,7 +5,10 @@
     <div class="sidebar">
       <app-sidebar></app-sidebar>
     </div>
-    <div class="container-right">
+    <div *ngIf="isLoading" class="loading-spinner">
+      <p-progressSpinner></p-progressSpinner>
+    </div>
+    <div *ngIf="!isLoading " class="container-right">
       <div class="planos">
         <h3 style="font-weight: 600; font-size: 18px; color: white;">Planos</h3>
         <div class="flex-plans">
@@ -38,9 +41,7 @@
               <button class="plansSubscribe pSub-white"  *ngIf="userPlan === ''">Assinar</button>
 
               <button class="plansSubscribe pSub-white"  *ngIf="userPlan === 'basic'">Plano atual</button>
-
-              <button class="plansSubscribe pSub-white" *ngIf="userPlan === 'gold'">Contido</button>
-            </div>
+        </div>
           </div>
           <div class="container-planos planoDestaque">
             <div class="container-planos-text">

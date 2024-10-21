@@ -17,6 +17,18 @@ body {
   align-items: start;
   padding-top: 120px;
 
+}.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+::ng-deep .p-progress-spinner {
+  .p-progress-spinner-circle {
+    stroke: white; /* Define a cor do spinner como branca */
+  }
 }
 
 
@@ -248,7 +260,7 @@ button {
     border-bottom: solid 1px #161C3D;
     ;
   }
-  
+
 
 
   .plansSubscribe {

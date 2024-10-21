@@ -1,55 +1,23 @@
 <app-navbar></app-navbar>
-<iframe src="https://chat-babyzilla.vercel.app/" frameborder="0"></iframe>
-<!-- <div class="container">
-  <div class="chat-container">
-    <div id="messageBox" class="message-box" *ngIf="showWelcomeMessage">
-          <img src="../../../../assets/icons/obizilla favicon 1.png" alt="Mascote" class="mascote" style="width: 50px; height: 50px;">
-
-      <p class="message">Olá! como posso te ajudar hoje?</p>
-    </div>
-    <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'bot-response': message.sender === 'bot'}" class="message">
-      <div class="text">{{ message.text }}</div>
-    </div>
-    <div id="chatArea" class="chat-area">
-      <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'bot-response': message.sender === 'bot'}" class="message">
-        <i *ngIf="message.sender === 'user'" class="pi pi-user icon"></i>
-        <div class="text">{{ message.text }}</div>
-      </div>
-      <div *ngIf="isLoading" class="bot-response">
-        <div class="icon"></div>
-        <div class="loading">
-          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-        </div>
-      </div>
-    </div>
-    <div class="input-wrapper">
-      <div class="input-container">
-        <textarea id="userInput" placeholder="Digite aqui..." rows="1" (keydown)="onEnter($event)"></textarea>
-        <button pButton type="button" icon="pi pi-send" id="sendButton" (click)="sendMessage()" class="send-button"></button>      </div>
-    </div>
-
-  </div>
-</div> -->
-<!-- <app-navbar></app-navbar>
-
 <div class="container">
-
-  <div id="messageBox" class="message-box" *ngIf="showWelcomeMessage">
-    <img src="../../../../assets/icons/obizilla favicon 1.png" alt="Mascote" class="mascote" style="width: 50px; height: 50px;">
-    <p class="message">Olá! como posso te ajudar hoje?</p>
+  <!-- Mensagem de boas-vindas -->
+  <div id="messageBox" class="message-box">
+    <img src="../../../../assets/icons/obizilla favicon 1.png" alt="Mascote" class="mascote">
+    <p class="message">Olá! Como posso te ajudar hoje?</p>
   </div>
 
-  <div id="chatArea" class="chat-area">
-    <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'bot-response': message.sender === 'bot'}" class="message">
-      <i *ngIf="message.sender === 'user'" class="pi pi-user icon"></i>
-      <div class="text">{{ message.text }}</div>
-    </div>
-  </div>
+  <!-- Área do chat -->
+  <div id="chatArea" class="chat-area" (scroll)="onChatScroll($event)"></div>
 </div>
 
+<!-- Área de input fixo ao final -->
 <div class="input-wrapper">
   <div class="input-container">
     <textarea id="userInput" placeholder="Digite aqui..." rows="1" (keydown)="onEnter($event)"></textarea>
-    <button pButton type="button" icon="pi pi-arrow-up" id="sendButton" (click)="sendMessage()"></button>
+
+    <!-- Ícone de envio usando uma imagem -->
+    <img class="imgs" id="sendButton" src="../../../../assets/icons/pra-cima (2).png" (click)="sendMessage()" style="font-size: 2rem; cursor: pointer;" alt="">
   </div>
-</div> -->
+</div>
+
+

@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import * as bcrypt from 'bcryptjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { v4 as uuidv4 } from 'uuid';
-
+import { Message } from '../../app/PlansModule/Components/types/message.type';
 // Definindo o tipo User
 type User = {
   id: string;
@@ -19,6 +19,8 @@ type Plan = {
   price: number;
   created_at: string;
 };
+
+
 // Configuração do Supabase
 const supabaseUrl = 'https://mugpnilbgwfuzhtyizfh.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11Z3BuaWxiZ3dmdXpodHlpemZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjM2NTY1MTYsImV4cCI6MjAzOTIzMjUxNn0.4_xLeNZKLXItRQt9vz4JOuxljPUL20AJESehddUZyuE';
@@ -214,6 +216,34 @@ export class AuthService {
       return null;
     }
   }
+  async getMessages(): Promise<Message[]> {
+    try {
+      const { data: messages, error } = await supabase
+        .from('messages')
+        .select('id, plan_id, user_id, text, created_at');
+
+      if (error || !messages) {
+        console.error('Erro ao buscar mensagens:', error);
+        return [];
+      }
+      console.log('Mensagens:', messages);
+      return messages as Message[];
+    } catch (error) {
+      console.error('Erro ao buscar mensagens:', error);
+      return [];
+    }
+  }
+
+  // async getMessagesById(): Promise<Message[]> {
+  //   try{
+  //     const { data: messages, error} await supabase
+  //     .from('messages')
+  //     .select( 'id', 'plan_id, user_id, text, created_at')
+  //     .eq('id', id)
+  //     .single();
+  //   }
+  // }
+
   // Método para decodificar o token
   decodeToken(token: string): { id: string; email: string; exp: number } | null {
     try {

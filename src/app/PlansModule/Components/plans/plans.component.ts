@@ -4,11 +4,13 @@ import { SidebarComponent } from '../../../../shared/sidebar/sidebar.component';
 import { AuthService } from '../../../../shared/Service/auth.service'; // Importe o AuthService para gerenciar o usuário
 import { NgIf } from '@angular/common';
 import { ToastComponent } from '../../../../shared/toast/toast.component';
+import { Message } from '../types/message.type';
+import { ProgressSpinnerModule } from 'primeng/progressspinner'; // Importe o ProgressSpinnerModule
 
 @Component({
   selector: 'app-plans',
   standalone: true,
-  imports: [NavbarComponent, SidebarComponent, NgIf, ToastComponent],
+  imports: [NavbarComponent, SidebarComponent, NgIf, ToastComponent, ProgressSpinnerModule],
   templateUrl: './plans.component.html',
   styleUrls: ['./plans.component.scss']
 })
@@ -18,7 +20,9 @@ export class PlansComponent implements OnInit {
   userID: string = ''; // Inicializar como string vazia
   planID: string = ''; // Inicializar como string vazia para armazenar o plan_id do usuário
   userPlan: string = ''; // Inicializar como string vazia para armazenar o nome do plano do usuário
-
+  userMessages: Message[] = []; // Inicializar como array vazio para armazenar as mensagens do usuário
+  hasPlan: boolean = false; // Propriedade para controlar a exibição da div
+  isLoading: boolean = true;
   constructor(private auth: AuthService) { }
 
   async ngOnInit() {
@@ -37,10 +41,15 @@ export class PlansComponent implements OnInit {
           console.log('Plan data:', planData);
           if (planData) {
             this.userPlan = planData.name; // Armazenar o nome do plano do usuário
+            this.hasPlan = true; // Definir hasPlan como true se o usuário tiver um plano
           }
+          console.log('cheguei aqui para pegar as mensagens')
+          await this.getUserMessages();
         }
       } catch (error) {
         console.error('Error fetching user or plan data:', error);
+      } finally {
+        this.isLoading = false; // Definir isLoading como false após carregar os dados
       }
     }
   }
@@ -54,6 +63,18 @@ export class PlansComponent implements OnInit {
       if (decodedToken && decodedToken.id) {
         this.userID = decodedToken.id;
       }
+    }
+  }
+
+  async getUserMessages() {
+    try {
+      const messages = await this.auth.getMessages();
+      if (messages) {
+        this.userMessages = messages.filter((message: Message) => message.user_id === this.userID);
+        console.log('User messages:', this.userMessages);
+      }
+    } catch (error) {
+      console.error('Error fetching user messages:', error);
     }
   }
 
