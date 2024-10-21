@@ -40,7 +40,7 @@ export const AppRoutes: Routes = [
   {
     path: 'chat',
     component: ChatComponent,
-    canActivate: [AuthGuard, PlanGuard] // Adicione o PlanGuard aqui
+    canActivate: [AuthGuard] // Adicione o PlanGuard aqui
   },
   {
     path: '**',
