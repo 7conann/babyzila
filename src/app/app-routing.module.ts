@@ -6,6 +6,7 @@ import { DashboardComponent } from './DashboardModule/Components/dashboard/dashb
 import { AnalyticsComponent } from './analyticsModule/Components/analytics/analytics.component';
 import { ChatComponent } from './chatModule/components/chat/chat.component';
 import { AuthGuard } from '../shared/Service/authguard.service';
+import { PlanGuard } from '../shared/Service/plan.service';
 
 export const AppRoutes: Routes = [
   {
@@ -39,7 +40,7 @@ export const AppRoutes: Routes = [
   {
     path: 'chat',
     component: ChatComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, PlanGuard] // Adicione o PlanGuard aqui
   },
   {
     path: '**',

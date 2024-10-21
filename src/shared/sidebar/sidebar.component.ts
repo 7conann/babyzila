@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Import CommonModule
 import { filter } from 'rxjs/operators';
+import { AuthService } from '../Service/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +16,7 @@ export class SidebarComponent implements OnInit {
   isSidebarOpen = false;
 
 
-  constructor(private route: Router, private renderer: Renderer2, private el: ElementRef) {}
+  constructor(private route: Router, private renderer: Renderer2, private el: ElementRef,private authService: AuthService) {}
 
   ngOnInit() {
     this.route.events
@@ -27,7 +28,11 @@ export class SidebarComponent implements OnInit {
     // Initial call to set the active button on load
     this.setActiveButton();
   }
-
+  async logout() {
+    await this.authService.logout();
+    this.route.navigate(['/login']);
+    console.log('Logout bem-sucedido!');
+  }
   goToRoute(route: string) {
     this.route.navigate([route]);
   }
@@ -53,5 +58,5 @@ export class SidebarComponent implements OnInit {
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
-  
+
 }

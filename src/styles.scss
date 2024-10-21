@@ -7,8 +7,9 @@
 * {
   font-family: 'Inter', sans-serif;
   color: white;
+}
 
-}::selection {
+::selection {
   background-color: white;
   color: black;
 }
@@ -28,4 +29,53 @@ body {
   height: 80%;
   display: flex;
   flex-direction: row;
+}
+
+.toast-custom {
+  position: absolute;
+  bottom: 15px; /* Ajuste conforme necessário */
+  right: 15px; /* Ajuste conforme necessário */
+  z-index: 999999 !important;
+  border-radius: 10px !important; /* Adicione o border-radius aqui */
+  padding: 12px 15px !important; /* Adicione o padding aqui */
+}
+
+/* Estilos personalizados para as notificações */
+.toast-success {
+  background-color: #4caf50 !important;
+  color: white !important;
+  z-index: 999999 !important;
+  border-radius: 10px !important; /* Adicione o border-radius aqui */
+  padding: 12px 15px !important; /* Adicione o padding aqui */
+}
+
+.toast-error {
+  background-color: #f44336 !important;
+  color: white !important;
+  border-radius: 10px !important; /* Adicione o border-radius aqui */
+  padding: 12px 15px !important; /* Adicione o padding aqui */
+}
+
+.toast-warning {
+  background-color: #ffc800 !important;
+  color: rgb(0, 0, 0) !important;
+  z-index: 999999 !important;
+  border-radius: 10px !important; /* Adicione o border-radius aqui */
+  padding: 12px 15px !important; /* Adicione o padding aqui */
+}
+
+.toast-info {
+  background-color: #2196f3 !important;
+  color: white !important;
+  z-index: 999999 !important;
+  border-radius: 10px !important; /* Adicione o border-radius aqui */
+  padding: 12px 15px !important; /* Adicione o padding aqui */
+}
+
+.toast-title {
+  font-weight: bold;
+}
+
+.toast-message {
+  font-size: 14px;
 }

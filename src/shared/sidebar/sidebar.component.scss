@@ -39,7 +39,9 @@
   border-right: 1px solid #161C3D;
   transition: left 0.3s ease-in-out;
   z-index: 1000;
-
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
   &.visible {
     left: 0; // Slide in when visible
   }
@@ -92,8 +94,12 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
-
+#sbt-chat.displays {
+  display: none !important;
+}
 @media screen and (min-width: 1200px) {
+
+
   .hamburger-btn {
     display: none;
   }
@@ -111,8 +117,17 @@
 
 
 @media screen and (max-width: 888px) {
+  #sbt-chat.displays {
+    display:flex  !important;
 
+  }
 .hamburger-btn {
   top: 37px;
 
 }}
+.flex-logout{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
