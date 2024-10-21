@@ -15,6 +15,7 @@ export class ChatComponent implements OnInit {
   aiResponses: string[] = [];
   canSendMessage: boolean = true; // Controla se o envio de mensagem é permitido
   shouldScroll: boolean = true; // Controla se o chat deve rolar automaticamente para o fim
+  aiMode: string = 'normal'; // Inicializa ai_mode com 'normal'
 
   constructor(private changeDetectorRef: ChangeDetectorRef, private auth: AuthService) {}
 
@@ -68,8 +69,14 @@ export class ChatComponent implements OnInit {
     // Envia a mensagem e os arrays de perguntas e respostas para o webhook
     fetch('https://webhook.workez.online/webhook/fe8ee5ca-1a13-449f-bc2c-54fca1795da6', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userQuestions: this.userQuestions, aiResponses: this.aiResponses })
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userQuestions: this.userQuestions,
+        aiResponses: this.aiResponses,
+        ai_mode: this.aiMode // Inclua `ai_mode` aqui
+      })
     })
     .then(response => response.json())
     .then(data => {
@@ -78,6 +85,11 @@ export class ChatComponent implements OnInit {
       let botText = this.getBotResponseText(data);
       this.aiResponses.push(botText);
       this.appendMessage('bot', botText);
+
+      // Atualiza o ai_mode com base na resposta do servidor
+      if (data.obizillaSettings && data.obizillaSettings.ai_mode) {
+        this.aiMode = data.obizillaSettings.ai_mode;
+      }
 
       // Reativa o envio de mensagens após a resposta
       this.canSendMessage = true;
@@ -148,69 +160,68 @@ export class ChatComponent implements OnInit {
     this.scrollToBottom(chatArea);
   }
 
- // Adiciona um loader com imagem e três pontinhos pulando
-appendLoading() {
-  const chatArea = document.getElementById('chatArea');
-  const loadingDiv = document.createElement('div');
-  loadingDiv.classList.add('bot-response'); // Adiciona a classe do bot response
+  // Adiciona um loader com imagem e três pontinhos pulando
+  appendLoading() {
+    const chatArea = document.getElementById('chatArea');
+    const loadingDiv = document.createElement('div');
+    loadingDiv.classList.add('bot-response'); // Adiciona a classe do bot response
 
-  loadingDiv.style.cssText = `
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    border: 1px solid #394AA3;
-    padding: 20px 20px 20px 30px;
-    border-radius: 21px 21px 0 0;
-    border-bottom: none;
-    justify-content: flex-start;
-  `;
+    loadingDiv.style.cssText = `
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+      border: 1px solid #394AA3;
+      padding: 20px 20px 20px 30px;
+      border-radius: 21px 21px 0 0;
+      border-bottom: none;
+      justify-content: flex-start;
+    `;
 
-  loadingDiv.innerHTML = `
-    <style>
-    .loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10px;
-}
+    loadingDiv.innerHTML = `
+      <style>
+      .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+      }
 
-.loading .dot {
-  width: 8px;
-  height: 8px;
-  background-color: #888;
-  border-radius: 50%;
-  margin: 0 3px;
-  animation: bounce 0.6s infinite alternate;
-}
+      .loading .dot {
+        width: 8px;
+        height: 8px;
+        background-color: #888;
+        border-radius: 50%;
+        margin: 0 3px;
+        animation: bounce 0.6s infinite alternate;
+      }
 
-.loading .dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
+      .loading .dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
 
-.loading .dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
+      .loading .dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
 
-@keyframes bounce {
-  to {
-    opacity: 0.3;
-    transform: translateY(-10px); /* Pulo mais visível */
+      @keyframes bounce {
+        to {
+          opacity: 0.3;
+          transform: translateY(-10px); /* Pulo mais visível */
+        }
+      }
+      </style>
+      <img src="../../../../assets/icons/obizilla favicon 1.png" alt="Mascote" class="mascote">
+      <div class="loading">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    `;
+
+    chatArea?.appendChild(loadingDiv);
+    this.scrollToBottom(chatArea);
   }
-}
-
-    </style>
-    <img src="../../../../assets/icons/obizilla favicon 1.png" alt="Mascote" class="mascote">
-    <div class="loading">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-    </div>
-  `;
-
-  chatArea?.appendChild(loadingDiv);
-  this.scrollToBottom(chatArea);
-}
 
   // Remove o loader
   removeLoading() {
@@ -230,13 +241,12 @@ appendLoading() {
     }
   }
 
-  // Função para rolar a área de chat até o final
   // Função para rolar a área de chat até o final com scroll suave
-scrollToBottom(chatArea: HTMLElement | null) {
-  setTimeout(() => {
-    if (chatArea) {
-      chatArea.scrollTop = chatArea.scrollHeight;
-    }
-  }, 100); // Atraso de 100ms para garantir que a mensagem tenha sido renderizada
-}
+  scrollToBottom(chatArea: HTMLElement | null) {
+    setTimeout(() => {
+      if (chatArea) {
+        chatArea.scrollTop = chatArea.scrollHeight;
+      }
+    }, 100); // Atraso de 100ms para garantir que a mensagem tenha sido renderizada
+  }
 }
