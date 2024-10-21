@@ -40,7 +40,8 @@ export class PlansComponent implements OnInit {
           const planData = await this.auth.getPlanById(this.planID);
           console.log('Plan data:', planData);
           if (planData) {
-            this.userPlan = planData.name; // Armazenar o nome do plano do usuário
+            this.userPlan = planData.name;
+            console.log('User plan:', this.userPlan);
             this.hasPlan = true; // Definir hasPlan como true se o usuário tiver um plano
           }
           console.log('cheguei aqui para pegar as mensagens')
@@ -65,7 +66,22 @@ export class PlansComponent implements OnInit {
       }
     }
   }
-
+  redirectToCheckout(planName: string) {
+    console.log('Redirecionando para o checkout:', planName);
+    const planUrls: { [key: string]: string } = {
+      basic: 'https://go.perfectpay.com.br/PPU38CP4O1P',
+      gold: 'https://go.perfectpay.com.br/PPU38CP4O1Q',
+      afiliado: 'https://go.perfectpay.com.br/PPU38CP5530'
+    };
+console.log('Redirecionando para o checkout:', planName);
+    const url = planUrls[planName.toLowerCase()];
+    if (url) {
+      window.location.href = url;
+      console.log('Redirecionando para o checkout:', url);
+    } else {
+      console.error('Plano inválido:', planName);
+    }
+  }
   async getUserMessages() {
     try {
       const messages = await this.auth.getMessages();

@@ -35,10 +35,10 @@
             </div>
             <div class="value">
               <div class="value-flex">
-                <p>R$ <strong class="size">10</strong></p>
+                <p>R$ <strong class="size">39,90</strong></p>
                 <p>mensalmente</p>
               </div>
-              <button class="plansSubscribe pSub-white"  *ngIf="userPlan === ''">Assinar</button>
+              <button class="plansSubscribe pSub-white"  *ngIf="userPlan === ''" (click)="redirectToCheckout('basic')">Assinar</button>
 
               <button class="plansSubscribe pSub-white"  *ngIf="userPlan === 'basic'">Plano atual</button>
         </div>
@@ -67,12 +67,12 @@
             </div>
             <div class="value">
               <div class="value-flex">
-                <p>R$ <strong class="size">78</strong></p>
+                <p>R$ <strong class="size">78,90</strong></p>
                 <p>mensalmente</p>
               </div>
-              <button class="plansSubscribe pSub-highlight"   *ngIf="userPlan === ''">Assinar</button>
+              <button class="plansSubscribe pSub-highlight"   *ngIf="userPlan === ''"(click)="redirectToCheckout('gold')">Assinar</button>
 
-              <button class="plansSubscribe pSub-highlight"  *ngIf="userPlan === 'basic'">Assinar</button>
+              <button class="plansSubscribe pSub-highlight"  *ngIf="userPlan === 'basic'"(click)="redirectToCheckout('gold')">Assinar</button>
               <button class="plansSubscribe pSub-highlight"  *ngIf="userPlan === 'gold'">Plano atual</button>
 
             </div>
@@ -100,7 +100,11 @@
               </div>
             </div>
             <div class="value">
-              <button class="plansSubscribe pSub-black">Aplicar</button>
+
+              <button class="plansSubscribe pSub-black"   *ngIf="userPlan === 'afiliado'" >Plano atual</button>
+              <button class="plansSubscribe pSub-black" (click)="redirectToCheckout('afiliado')" *ngIf="userPlan === ''">Aplicar</button>
+
+              <button class="plansSubscribe pSub-black" (click)="redirectToCheckout('afiliado')" *ngIf="userPlan === 'gold' || userPlan === 'basic'">Aplicar</button>
             </div>
           </div>
         </div>
